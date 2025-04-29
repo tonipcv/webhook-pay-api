@@ -15,7 +15,12 @@ export interface WebhookContact {
   address_state_full_name: string;
   address_country: string;
   address_zip_code: string;
-  lead: any[];
+  lead: Array<{
+    id: string;
+    name: string;
+    email: string;
+    created_at: string;
+  }>;
 }
 
 export interface WebhookProduct {
@@ -50,7 +55,11 @@ export interface WebhookPayment {
     tid: string;
   };
   can_try_again: number;
-  coupon: any;
+  coupon: {
+    code: string;
+    value: number;
+    type: string;
+  } | null;
   currency: string;
   discount_value: number;
   gross: number;
@@ -86,7 +95,12 @@ export interface WebhookPayment {
 }
 
 export interface WebhookBody {
-  affiliations: any;
+  affiliations: {
+    id: string;
+    name: string;
+    email: string;
+    value: number;
+  }[];
   api_token: string;
   cancel_at_cycle_end: number;
   cancel_reason: string;
@@ -97,7 +111,12 @@ export interface WebhookBody {
   };
   charged_every_days: number;
   charged_times: number;
-  contracts: any[];
+  contracts: Array<{
+    id: string;
+    status: string;
+    created_at: string;
+    updated_at: string;
+  }>;
   current_invoice: {
     charge_at: string;
     code: string;
@@ -187,14 +206,18 @@ export interface WebhookBody {
       value: number;
     };
     source: {
-      source: any;
-      checkout_source: any;
-      utm_source: any;
-      utm_campaign: any;
-      utm_medium: any;
-      utm_content: any;
-      utm_term: any;
-      pptc: any[];
+      source: string | null;
+      checkout_source: string | null;
+      utm_source: string | null;
+      utm_campaign: string | null;
+      utm_medium: string | null;
+      utm_content: string | null;
+      utm_term: string | null;
+      pptc: Array<{
+        id: string;
+        name: string;
+        value: number;
+      }>;
     };
     status: string;
     type: string;
@@ -273,8 +296,8 @@ export interface WebhookPayload {
   headers: {
     [key: string]: string;
   };
-  params: Record<string, any>;
-  query: Record<string, any>;
+  params: Record<string, string>;
+  query: Record<string, string>;
   body: WebhookBody;
   webhookUrl: string;
   executionMode: string;

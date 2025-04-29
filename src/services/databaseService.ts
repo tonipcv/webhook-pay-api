@@ -1,4 +1,4 @@
-import { PrismaClient, SubscriptionFuturosTechASAAS } from '@/generated/prisma';
+import { PrismaClient } from '@/generated/prisma';
 import { WebhookPayload } from '../types/webhook';
 
 const prisma = new PrismaClient();
